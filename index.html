@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munur Studio | 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;600;800&display=swap');
+        
+        :root {
+            --cursor-size: 20px;
+            --accent-primary: #ff3d3d;
+            --accent-secondary: #ff8e3c;
+            --accent-gradient: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            --bg-pure: #000000;
+        }
+
+        /* Yumuşak Kaydırma Efekti */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-pure);
+            color: #f1f1f1;
+            margin: 0;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Mouse Takip Eden Halka */
+        #cursor-dot {
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        #cursor-outline {
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Saf Siyah Arka Plan */
+        .hero-bg {
+            background-color: var(--bg-pure);
+            position: relative;
+        }
+
+        /* Arka Plan Efekti */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 61, 61, 0.05) 0%, transparent 50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Modern Izgara Sistemi */
+        .hero-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100px 100px;
+            mask-image: radial-gradient(ellipse at center, black, transparent 90%);
+            pointer-events: none;
+        }
+
+        /* Cam Kartlar */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .glass-card:hover {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Navigasyon Cam Efekti */
+        .nav-glass {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Başlık Gümüş Gradyan */
+        .gradient-text-shine {
+            background: linear-gradient(to bottom, #ffffff 40%, #71717a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Aksan Gradyan */
+        .gradient-accent {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hover-target:hover ~ #cursor-outline {
+            transform: scale(3.5);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #fff;
+        }
+
+        .separator {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            margin: 6rem 0;
+        }
+
+        /* Reveal Animasyonu */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            #cursor-dot, #cursor-outline { display: none; }
+            body { cursor: auto; }
+        }
+    </style>
+</head>
+<body class="hero-bg min-h-screen">
+
+    <div class="bg-mesh"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <!-- Sabitlenmiş Navigasyon Barı -->
+    <nav class="fixed top-0 left-0 w-full z-50 nav-glass">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+            <a href="#" class="inline-flex items-center space-x-4 bg-white/5 px-4 py-2 rounded-xl border border-white/10 hover-target transition-all group relative overflow-hidden">
+                <div class="absolute inset-0 bg-red-600/5 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500"></div>
+                <span class="relative w-2 h-2 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.8)]"></span>
+                <div class="relative flex flex-col">
+                    <span class="text-[10px] font-black tracking-[0.4em] uppercase text-white group-hover:text-red-500 transition-colors">Munur Studio</span>
+                    <span class="text-[7px] font-bold tracking-[0.1em] uppercase opacity-40">Active System</span>
+                </div>
+            </a>
+            
+            <div class="flex items-center space-x-6 md:space-x-8">
+                <a href="#projeler" class="text-[10px] font-bold tracking-[0.3em] uppercase opacity-40 hover:opacity-100 transition-all hover-target">Projeler</a>
+                <a href="#hakkimda" class="text-[10px] font-bold tracking-[0.3em] uppercase opacity-40 hover:opacity-100 transition-all hover-target">Hakkımda</a>
+                <div class="h-6 w-px bg-white/10"></div>
+                <a href="#iletisim" class="group flex items-center space-x-3 text-[10px] font-bold tracking-[0.3em] uppercase bg-white text-black px-5 py-2.5 rounded-lg hover-target hover:bg-red-600 hover:text-white transition-all shadow-xl shadow-white/5">
+                    <span>İletişim</span>
+                    <i class="fa-solid fa-chevron-right text-[8px] group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-6 pt-32 pb-24 md:pb-40 relative z-10">
+        
+        <!-- Ana Başlık -->
+        <header class="mb-48 relative reveal">
+            <div class="absolute -top-20 -left-10 text-[20rem] font-black text-white/[0.015] select-none pointer-events-none">MS</div>
+            <h1 class="text-8xl md:text-[13rem] font-extrabold tracking-tighter leading-[0.75] mb-12 relative">
+                <span class="block text-white">Future</span>
+                <span class="gradient-text-shine">Architect</span>
+            </h1>
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-12 mt-16">
+                <p class="text-2xl md:text-4xl text-gray-400 max-w-3xl font-light leading-tight">
+                    <span class="text-white font-semibold">ByMunur</span>; toplulukların kalbinde atan <span class="gradient-accent font-black">dijital ritmi</span> tasarlar.
+                </p>
+                <div class="flex flex-col items-end opacity-30">
+                    <div class="flex items-center space-x-4 mb-2">
+                        <i class="fa-solid fa-circle-nodes text-[10px]"></i>
+                        <p class="text-[10px] font-bold uppercase tracking-[0.5em]">2025 Visionary</p>
+                    </div>
+                    <div class="text-[8px] tracking-[0.2em] font-mono">01001101 01010011</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Güncellenmiş İstatistik Paneli -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-48 reveal">
+            <div class="p-8 border border-white/5 rounded-3xl text-center bg-white/[0.01]">
+                <div class="text-4xl font-black mb-2 gradient-accent">70+</div>
+                <div class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Tamamlanan Proje</div>
+            </div>
+            <div class="p-8 border border-white/5 rounded-3xl text-center bg-white/[0.01]">
+                <div class="text-4xl font-black mb-2 gradient-accent">17K+</div>
+                <div class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Aktif Kullanıcı</div>
+            </div>
+            <div class="p-8 border border-white/5 rounded-3xl text-center bg-white/[0.01]">
+                <div class="text-4xl font-black mb-2 gradient-accent">%87</div>
+                <div class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Müşteri Memnuniyeti</div>
+            </div>
+            <div class="p-8 border border-white/5 rounded-3xl text-center bg-white/[0.01]">
+                <div class="text-4xl font-black mb-2 gradient-accent">5+</div>
+                <div class="text-[10px] uppercase tracking-widest opacity-40 font-bold">Yıllık Deneyim</div>
+            </div>
+        </div>
+
+        <!-- Servisler Section -->
+        <div id="projeler" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-48 scroll-mt-32">
+            <a href="https://discord.gg/RgqNSn63bS" target="_blank" class="glass-card p-14 rounded-[3rem] group hover-target relative overflow-hidden reveal">
+                <div class="mb-14 flex justify-between items-center">
+                    <div class="w-14 h-14 bg-red-500/10 rounded-2xl flex items-center justify-center group-hover:bg-red-500/20 transition-all border border-red-500/20">
+                        <i class="fa-brands fa-discord text-3xl text-red-500"></i>
+                    </div>
+                    <i class="fa-solid fa-arrow-right-long opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 tracking-tight">Texturepacks</h3>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">Piksel kusursuzluğunda, oyun deneyimini sanata dönüştüren özel setler.</p>
+                <div class="mt-6 flex gap-2">
+                    <span class="text-[8px] bg-white/5 px-2 py-1 rounded-md border border-white/5 font-bold uppercase tracking-widest">v4.0 Ready</span>
+                </div>
+            </a>
+
+            <a href="https://discord.gg/xx2hHhAtAC" target="_blank" class="glass-card p-14 rounded-[3rem] group hover-target relative overflow-hidden reveal" style="transition-delay: 100ms;">
+                <div class="mb-14 flex justify-between items-center">
+                    <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-white/10 transition-all border border-white/10">
+                        <i class="fa-solid fa-ranking-star text-3xl text-white"></i>
+                    </div>
+                    <i class="fa-solid fa-arrow-right-long opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 tracking-tight">Tierlist</h3>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">Fikirlerin yarıştığı, topluluk kültürünün şekillendiği dinamik ekosistem.</p>
+                <div class="mt-6 flex gap-2">
+                    <span class="text-[8px] bg-white/5 px-2 py-1 rounded-md border border-white/5 font-bold uppercase tracking-widest">Community Hub</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/bymunur/" target="_blank" class="glass-card p-14 rounded-[3rem] group hover-target relative overflow-hidden reveal" style="transition-delay: 200ms;">
+                <div class="mb-14 flex justify-between items-center">
+                    <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center group-hover:bg-orange-500/20 transition-all border border-orange-500/20">
+                        <i class="fa-brands fa-instagram text-3xl text-orange-500"></i>
+                    </div>
+                    <i class="fa-solid fa-arrow-right-long opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 tracking-tight">Instagram</h3>
+                <p class="text-gray-500 text-sm leading-relaxed font-medium">Kişisel İnstagram Sayfam</p>
+                <div class="mt-6 flex gap-2">
+                    <span class="text-[8px] bg-white/5 px-2 py-1 rounded-md border border-white/5 font-bold uppercase tracking-widest">Active 24/7</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="separator"></div>
+
+        <!-- Hakkımda & Yeni Özellikler Section -->
+        <section id="hakkimda" class="grid md:grid-cols-12 gap-24 mb-64 scroll-mt-32 reveal">
+            <div class="md:col-span-5">
+                <div class="sticky top-40">
+                    <div class="flex items-center space-x-4 mb-8">
+                        <span class="h-px w-12 bg-red-600"></span>
+                        <span class="text-[11px] font-black uppercase tracking-[1em] text-red-600">Felsefemiz</span>
+                    </div>
+                    <h2 class="text-6xl font-extrabold mb-10 leading-[1.1] tracking-tighter text-white">Sınırları <br><span class="italic font-light opacity-50">Tasarla,</span> <br>Kültürü <span class="gradient-accent italic">İnşa Et.</span></h2>
+                    
+                    <div class="space-y-6 mt-12">
+                        <div class="group">
+                            <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <span>UI/UX Design</span>
+                                <span>%95</span>
+                            </div>
+                            <div class="h-1 bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full bg-red-600 w-[95%]"></div>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <span>Community Management</span>
+                                <span>%90</span>
+                            </div>
+                            <div class="h-1 bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full bg-orange-500 w-[90%]"></div>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <div class="flex justify-between text-[10px] font-bold uppercase tracking-widest mb-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <span>Frontend Development</span>
+                                <span>%85</span>
+                            </div>
+                            <div class="h-1 bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full bg-white w-[85%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:col-span-7 space-y-20">
+                <div class="space-y-10">
+                    <p class="text-4xl font-light text-gray-300 leading-tight tracking-tight">
+                        Dijital dünyada <span class="text-white font-bold underline decoration-red-600 decoration-4 underline-offset-8">iz bırakmak</span>, sadece kod yazmak değil; bir ruh katmaktır.
+                    </p>
+                    <p class="text-xl text-gray-500 leading-relaxed font-medium">
+                        Minecraft'ın sınırsız bloklarından Discord'un karmaşık sunucu odalarına kadar, her noktada mükemmelliği hedefliyoruz.
+                    </p>
+                </div>
+
+                <!-- 7 Yeni Özellik Bölümü -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 border-t border-white/5 pt-20">
+                    <!-- Özellik 1 -->
+                    <div class="group reveal">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-black transition-all">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <h4 class="font-black text-lg tracking-tight">Bot Geliştirme</h4>
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed">Topluluğunuza özel, yüksek performanslı Discord ve otomasyon botları.</p>
+                    </div>
+                    <!-- Özellik 2 -->
+                    <div class="group reveal">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400 group-hover:text-black transition-all">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h4 class="font-black text-lg tracking-tight">Teknik Analiz</h4>
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed">Veri odaklı yaklaşımla topluluk etkileşimini ve büyüme grafiğini optimize ediyoruz.</p>
+                    </div>
+                    <!-- Özellik 3 -->
+                    <div class="group reveal">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-yellow-400 group-hover:bg-yellow-400 group-hover:text-black transition-all">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <h4 class="font-black text-lg tracking-tight">Yüksek Hız (Low Latency)</h4>
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed">Tüm sistemlerimizde 0'a yakın gecikme ve kesintisiz çalışma garantisi.</p>
+                    </div>
+                    <!-- Özellik 4 -->
+                    <div class="group reveal">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-purple-500 group-hover:bg-purple-500 group-hover:text-black transition-all">
+                                <i class="fa-solid fa-palette"></i>
+                            </div>
+                            <h4 class="font-black text-lg tracking-tight">Creative Branding</h4>
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed">Topluluğunuzun kimliğini yansıtan özel görsel diller ve marka tasarımları.</p>
+                    </div>
+                    <!-- Özellik 5 -->
+                    <div class="group reveal">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-green-500 group-hover:bg-green-500 group-hover:text-black transition-all">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <h4 class="font-black text-lg tracking-tight">7/24 Teknik Destek</h4>
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed">Sistemlerinizde oluşabilecek her türlü sorunda anında profesyonel müdahale.</p>
+                    </div>
+                    <!-- Özellik 6 -->
+                    <div class="group reveal">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-pink-500 group-hover:bg-pink-500 group-hover:text-black transition-all">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <h4 class="font-black text-lg tracking-tight">AI Entegrasyonu</h4>
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed">Modern topluluklara yapay zeka destekli içerik ve moderasyon çözümleri.</p>
+                    </div>
+                    <!-- Özellik 7 -->
+                    <div class="group reveal">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all">
+                                <i class="fa-solid fa-infinity"></i>
+                            </div>
+                            <h4 class="font-black text-lg tracking-tight">Sınırsız Ölçeklenebilirlik</h4>
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed">10 kişiden 100.000 kişiye kadar sorunsuz büyüyebilen modüler altyapı.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Atatürk Sözü -->
+        <section class="mb-64 relative reveal">
+            <div class="ataturk-quote text-center">
+                <i class="fa-solid fa-quote-left text-red-600/10 text-8xl mb-12 block mx-auto"></i>
+                <h2 class="text-3xl md:text-5xl font-extralight text-white leading-snug tracking-tight italic mb-10 max-w-4xl mx-auto">
+                    "Vatanını en çok seven <span class="font-black not-italic text-red-600">görevini en iyi yapandır.</span>"
+                </h2>
+                <div class="flex flex-col items-center">
+                    <div class="flex items-center space-x-6">
+                        <span class="h-px w-16 bg-white/10"></span>
+                        <span class="text-[12px] font-black tracking-[0.6em] uppercase text-white/40">Mustafa Kemal Atatürk</span>
+                        <span class="h-px w-16 bg-white/10"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="iletisim" class="text-center pb-32 scroll-mt-32 reveal">
+            <div class="flex flex-col items-center">
+                <div class="h-32 w-px bg-gradient-to-b from-transparent via-red-600/30 to-transparent mb-16"></div>
+                
+                <div class="mb-16">
+                    <span class="text-[10px] font-black uppercase tracking-[1em] opacity-20 block mb-4">Ready to upgrade?</span>
+                    <h3 class="text-5xl md:text-7xl font-black tracking-tighter">Gelecek <span class="gradient-accent">Başlıyor.</span></h3>
+                </div>
+
+                <div class="flex space-x-16 mb-32">
+                    <a href="https://www.instagram.com/bymunur/" target="_blank" class="text-[10px] font-black tracking-[0.4em] uppercase opacity-40 hover:opacity-100 transition-all hover-target flex items-center space-x-2">
+                        <span>Instagram</span>
+                        <i class="fa-brands fa-instagram text-[12px]"></i>
+                    </a>
+                    <a href="https://discord.gg/xx2hHhAtAC" target="_blank" class="text-[10px] font-black tracking-[0.4em] uppercase opacity-40 hover:opacity-100 transition-all hover-target flex items-center space-x-2">
+                        <span>Discord</span>
+                        <i class="fa-brands fa-discord text-[12px]"></i>
+                    </a>
+                </div>
+                
+                <div class="flex flex-col items-center space-y-4">
+                    <div class="flex items-center space-x-4 opacity-10">
+                        <span class="text-[9px] font-bold tracking-[0.5em] uppercase">Munur Studio © MMXXV</span>
+                        <div class="w-1 h-1 bg-white rounded-full"></div>
+                        <span class="text-[9px] font-bold tracking-[0.5em] uppercase">Built for Excellence</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Custom Cursor
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+        const mesh = document.querySelector('.bg-mesh');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            dot.style.left = `${posX}px`;
+            dot.style.top = `${posY}px`;
+            dot.style.transform = `translate(-50%, -50%)`;
+
+            outline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 800, fill: "forwards" });
+            outline.style.transform = `translate(-50%, -50%)`;
+
+            // Arka plan ışığını fareyi takip ettir
+            mesh.style.background = `radial-gradient(circle at ${posX}px ${posY}px, rgba(255, 61, 61, 0.08) 0%, transparent 60%)`;
+        });
+
+        // Reveal Animation on Scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        // Hover Effects
+        const targets = document.querySelectorAll('a, button, .hover-target, .glass-card');
+        targets.forEach(target => {
+            target.addEventListener('mouseenter', () => {
+                outline.style.width = '100px';
+                outline.style.height = '100px';
+                outline.style.borderColor = 'rgba(255, 61, 61, 0.4)';
+                outline.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+            });
+            target.addEventListener('mouseleave', () => {
+                outline.style.width = '20px';
+                outline.style.height = '20px';
+                outline.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+                outline.style.backgroundColor = 'transparent';
+            });
+        });
+    </script>
+</body>
+</html>
