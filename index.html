@@ -17,7 +17,6 @@
             --bg-pure: #000000;
         }
 
-        /* Yumuşak Kaydırma Efekti */
         html {
             scroll-behavior: smooth;
         }
@@ -31,7 +30,6 @@
             cursor: none;
         }
 
-        /* Mouse Takip Eden Halka */
         #cursor-dot {
             width: 4px;
             height: 4px;
@@ -54,13 +52,11 @@
             transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* Saf Siyah Arka Plan */
         .hero-bg {
             background-color: var(--bg-pure);
             position: relative;
         }
 
-        /* Arka Plan Efekti */
         .bg-mesh {
             position: fixed;
             top: 0;
@@ -72,7 +68,6 @@
             pointer-events: none;
         }
 
-        /* Modern Izgara Sistemi */
         .hero-bg::after {
             content: "";
             position: absolute;
@@ -84,7 +79,6 @@
             pointer-events: none;
         }
 
-        /* Cam Kartlar */
         .glass-card {
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(20px);
@@ -99,7 +93,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        /* Navigasyon Cam Efekti */
+
         .nav-glass {
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(15px);
@@ -107,14 +101,13 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Başlık Gümüş Gradyan */
         .gradient-text-shine {
             background: linear-gradient(to bottom, #ffffff 40%, #71717a 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Aksan Gradyan */
+
         .gradient-accent {
             background: var(--accent-gradient);
             -webkit-background-clip: text;
@@ -133,7 +126,6 @@
             margin: 6rem 0;
         }
 
-        /* Reveal Animasyonu */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -156,7 +148,7 @@
     <div id="cursor-dot"></div>
     <div id="cursor-outline"></div>
 
-    <!-- Sabitlenmiş Navigasyon Barı -->
+
     <nav class="fixed top-0 left-0 w-full z-50 nav-glass">
         <div class="max-w-6xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
             <a href="#" class="inline-flex items-center space-x-4 bg-white/5 px-4 py-2 rounded-xl border border-white/10 hover-target transition-all group relative overflow-hidden">
@@ -182,7 +174,7 @@
 
     <div class="max-w-6xl mx-auto px-6 pt-32 pb-24 md:pb-40 relative z-10">
         
-        <!-- Ana Başlık -->
+
         <header class="mb-48 relative reveal">
             <div class="absolute -top-20 -left-10 text-[20rem] font-black text-white/[0.015] select-none pointer-events-none">MS</div>
             <h1 class="text-8xl md:text-[13rem] font-extrabold tracking-tighter leading-[0.75] mb-12 relative">
@@ -203,7 +195,6 @@
             </div>
         </header>
 
-        <!-- Güncellenmiş İstatistik Paneli -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-48 reveal">
             <div class="p-8 border border-white/5 rounded-3xl text-center bg-white/[0.01]">
                 <div class="text-4xl font-black mb-2 gradient-accent">70+</div>
@@ -223,7 +214,7 @@
             </div>
         </div>
 
-        <!-- Servisler Section -->
+
         <div id="projeler" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-48 scroll-mt-32">
             <a href="https://discord.gg/RgqNSn63bS" target="_blank" class="glass-card p-14 rounded-[3rem] group hover-target relative overflow-hidden reveal">
                 <div class="mb-14 flex justify-between items-center">
@@ -270,7 +261,7 @@
 
         <div class="separator"></div>
 
-        <!-- Hakkımda & Yeni Özellikler Section -->
+
         <section id="hakkimda" class="grid md:grid-cols-12 gap-24 mb-64 scroll-mt-32 reveal">
             <div class="md:col-span-5">
                 <div class="sticky top-40">
@@ -322,9 +313,8 @@
                     </p>
                 </div>
 
-                <!-- 7 Yeni Özellik Bölümü -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 border-t border-white/5 pt-20">
-                    <!-- Özellik 1 -->
+    
                     <div class="group reveal">
                         <div class="flex items-center space-x-4 mb-4">
                             <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-black transition-all">
@@ -334,7 +324,7 @@
                         </div>
                         <p class="text-sm text-gray-500 leading-relaxed">Topluluğunuza özel, yüksek performanslı Discord ve otomasyon botları.</p>
                     </div>
-                    <!-- Özellik 2 -->
+         
                     <div class="group reveal">
                         <div class="flex items-center space-x-4 mb-4">
                             <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-cyan-400 group-hover:bg-cyan-400 group-hover:text-black transition-all">
@@ -344,7 +334,7 @@
                         </div>
                         <p class="text-sm text-gray-500 leading-relaxed">Veri odaklı yaklaşımla topluluk etkileşimini ve büyüme grafiğini optimize ediyoruz.</p>
                     </div>
-                    <!-- Özellik 3 -->
+    
                     <div class="group reveal">
                         <div class="flex items-center space-x-4 mb-4">
                             <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-yellow-400 group-hover:bg-yellow-400 group-hover:text-black transition-all">
@@ -364,7 +354,7 @@
                         </div>
                         <p class="text-sm text-gray-500 leading-relaxed">Topluluğunuzun kimliğini yansıtan özel görsel diller ve marka tasarımları.</p>
                     </div>
-                    <!-- Özellik 5 -->
+
                     <div class="group reveal">
                         <div class="flex items-center space-x-4 mb-4">
                             <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-green-500 group-hover:bg-green-500 group-hover:text-black transition-all">
@@ -384,7 +374,7 @@
                         </div>
                         <p class="text-sm text-gray-500 leading-relaxed">Modern topluluklara yapay zeka destekli içerik ve moderasyon çözümleri.</p>
                     </div>
-                    <!-- Özellik 7 -->
+      
                     <div class="group reveal">
                         <div class="flex items-center space-x-4 mb-4">
                             <div class="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all">
@@ -398,7 +388,7 @@
             </div>
         </section>
 
-        <!-- Atatürk Sözü -->
+
         <section class="mb-64 relative reveal">
             <div class="ataturk-quote text-center">
                 <i class="fa-solid fa-quote-left text-red-600/10 text-8xl mb-12 block mx-auto"></i>
@@ -415,7 +405,6 @@
             </div>
         </section>
 
-        <!-- Footer -->
         <footer id="iletisim" class="text-center pb-32 scroll-mt-32 reveal">
             <div class="flex flex-col items-center">
                 <div class="h-32 w-px bg-gradient-to-b from-transparent via-red-600/30 to-transparent mb-16"></div>
@@ -449,7 +438,7 @@
     </div>
 
     <script>
-        // Custom Cursor
+
         const dot = document.getElementById('cursor-dot');
         const outline = document.getElementById('cursor-outline');
         const mesh = document.querySelector('.bg-mesh');
@@ -468,11 +457,11 @@
             }, { duration: 800, fill: "forwards" });
             outline.style.transform = `translate(-50%, -50%)`;
 
-            // Arka plan ışığını fareyi takip ettir
+  
             mesh.style.background = `radial-gradient(circle at ${posX}px ${posY}px, rgba(255, 61, 61, 0.08) 0%, transparent 60%)`;
         });
 
-        // Reveal Animation on Scroll
+
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -487,7 +476,6 @@
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
 
-        // Hover Effects
         const targets = document.querySelectorAll('a, button, .hover-target, .glass-card');
         targets.forEach(target => {
             target.addEventListener('mouseenter', () => {
